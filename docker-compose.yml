@@ -1,19 +1,19 @@
 services:
-  geoserver:
-    container_name: geonum_geoserver
-    image: docker.osgeo.org/geoserver:2.26.0
-    environment:
+  geoserver: #nom du service à choisir
+    container_name: geonum_geoserver #nom du conteneur à choisir
+    image: docker.osgeo.org/geoserver:2.26.0  #Que met on dans le conteneur (ici geoserver)
+    environment: #configuration du server
       - RUN_UNPRIVILEGED=true
       - CHANGE_OWNERSHIP_ON_FOLDERS="/opt /opt/geoserver_data/ /mnt/geoserver_geodata"
       - CORS_ENABLED=true
       - SKIP_DEMO_DATA=true
     ports:
-      - "8080:8080"
-    volumes:
+      - "8080:8080" #interne:externe
+    volumes: #stocke les données même après la fermeture du contener
       - ./geoserver/opt:/opt/geoserver_data
 
-  web:
-    container_name: geonum_web
+  web: #nom du service à choisir
+    container_name: geonum_web #nom du conteneur à choisir
     image: caddy:latest
     ports:
       - "80:80"
